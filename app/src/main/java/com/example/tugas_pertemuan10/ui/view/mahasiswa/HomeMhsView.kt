@@ -89,6 +89,94 @@ fun HomeMhsView(
 }
 
 
+@Composable
+fun BodyHomeMhsView(
+    homeUiState: HomeUiState,
+    onClick: (String) -> Unit = {},
+    modifier: Modifier = Modifier
+) {
+    val coroutineScope = rememberCoroutineScope()
+    val snackbarHostState = remember { SnackbarHostState() } // Snackbar state
+    when{
+        homeUiState.isLoading -> {
+            //Menampilkan indikator loading
+            Box(
+                modifier = modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ){
+                CircularProgressIndicator()
+            }
+        }
+        homeUiState.isError -> {
+            //Menampilkan pesan error
+            LaunchedEffect(homeUiState.errorMessage) {
+                homeUiState.errorMessage?.let { message ->
+                    coroutineScope.launch {
+                        snackbarHostState.showSnackbar(message) //tampilkan snackbar
+                    }
+            }
+        }
+    }
+        homeUiState.ListMhs.isEmpty() ->{
+            //Menampilkan pesan jika data kosong
+            Box(
+                modifier = modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ){
+                Text(
+                    text = "Tidak ada data Mahasiswa",
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Bold,
+                    modifier = modifier.padding(16.dp)
+                )
+            }
+        }
+        else -> {
+            //Menampilkan daftar mahasiswa
+            ListMahasiswa(
+                lisMhs = homeUiState.ListMhs,
+                onClick = {
+                    onClick(it)
+                    println(it)
+                },
+                modifier = modifier
+            )
+        }
+    }
+}
+
+
+
+@Composable
+fun ListMahasiswa(
+    lisMhs: List<Mahasiswa>,
+    modifier: Modifier = Modifier,
+    onClick: (String) -> Unit = {}
+){
+    LazyColumn(
+        modifier = modifier
+    ) {
+        items(
+            items = lisMhs,
+            itemContent = {mhs ->
+                CardMhs(
+                    mhs = mhs,
+                    onClick = {onClick(mhs.nim)}
+                )
+            }
+        )
+    }
+}
+
+
+
+
+
+
+
+
+
+
 
 
 
