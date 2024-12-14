@@ -216,7 +216,7 @@ fun CardMhs(
             }
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically
+
             ){
                 Icon(
                     imageVector = Icons.Filled.Home,
