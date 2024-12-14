@@ -18,4 +18,10 @@ interface AlamatNavigasi {
         const val NIM = "nim"
         val routeWithArgs = "$route/{$NIM}"
     }
+
+    object DestinationEdit : AlamatNavigasi{
+        override val route =  "edit"
+        const val NIM = "nim"
+        val routeWithArgs = "$route/{$NIM}"
+    }
 }
