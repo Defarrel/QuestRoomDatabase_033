@@ -71,9 +71,9 @@ class UpdateMhsViewModel(savedStateHandle: SavedStateHandle,
             )
         }
 
-        fun resetSnackBarMessage(){
-            updateUIState = updateUIState.copy(snackBarMessage = null)
-        }
+    }
+    fun resetSnackBarMessage(){
+        updateUIState = updateUIState.copy(snackBarMessage = null)
     }
 }
 
