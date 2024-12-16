@@ -57,8 +57,7 @@ fun DetailMhsView(
             TopAppBar(
                 judul = "Detail Mahasiswa",
                 showBackButton = true,
-                onBack = onBack,
-                modifier = modifier
+                onBack = onBack
             )
         },
         floatingActionButton = {
@@ -66,7 +65,7 @@ fun DetailMhsView(
                 onClick = {
                     onEditClick(viewModel.detailUiState.value.detailUiEvent.nim) },
                 shape = MaterialTheme.shapes.medium,
-                modifier = modifier.padding(16.dp)
+                modifier = Modifier.padding(16.dp)
             ){
                 Icon(
                     imageVector = Icons.Default.Edit,
@@ -78,7 +77,7 @@ fun DetailMhsView(
         val detailUiState by viewModel.detailUiState.collectAsState()
 
         BodyDetailMhs(
-            modifier = modifier.padding(innerPadding),
+            modifier = Modifier.padding(innerPadding),
             detailUiState = detailUiState,
             onDeleteClick = {
                 viewModel.deleteMhs()
@@ -114,7 +113,7 @@ fun BodyDetailMhs(
                     mahasiswa = detailUiState.detailUiEvent.toMahasiswaEntity(),
                     modifier = modifier
                 )
-                Spacer(modifier = modifier.padding(8.dp))
+                Spacer(modifier = Modifier.padding(8.dp))
                 Button(
                     onClick = {
                         deleteConfirmationRequared = true
@@ -146,27 +145,26 @@ fun ItemDetailMhs(
     mahasiswa: Mahasiswa
 ){
     Card(
-        modifier = modifier
-            .fillMaxWidth(),
+        modifier = modifier.fillMaxWidth().padding(top = 20.dp),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.primaryContainer,
             contentColor = MaterialTheme.colorScheme.onPrimaryContainer
         )
     ){
         Column(
-            modifier = modifier
+            modifier = Modifier
                 .padding(16.dp)
         ) {
             ComponentDetailMhs(judul = "NIM", isinya = mahasiswa.nim)
-            Spacer(modifier = modifier.padding(4.dp))
+            Spacer(modifier = Modifier.padding(4.dp))
             ComponentDetailMhs(judul = "Nama", isinya = mahasiswa.nama)
-            Spacer(modifier = modifier.padding(4.dp))
+            Spacer(modifier = Modifier.padding(4.dp))
             ComponentDetailMhs(judul = "Alamat", isinya = mahasiswa.alamat)
-            Spacer(modifier = modifier.padding(4.dp))
+            Spacer(modifier = Modifier.padding(4.dp))
             ComponentDetailMhs(judul = "Jenis Kelamin", isinya = mahasiswa.jenisKelamin)
-            Spacer(modifier = modifier.padding(4.dp))
+            Spacer(modifier = Modifier.padding(4.dp))
             ComponentDetailMhs(judul = "Kelas", isinya = mahasiswa.kelas)
-            Spacer(modifier = modifier.padding(4.dp))
+            Spacer(modifier = Modifier.padding(4.dp))
             ComponentDetailMhs(judul = "Angkatan", isinya = mahasiswa.angkatan)
         }
     }

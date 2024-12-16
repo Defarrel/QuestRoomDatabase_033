@@ -51,7 +51,7 @@ fun UpdateMhsView(
     }
 
     Scaffold(
-        modifier = modifier,
+        modifier = Modifier,
         snackbarHost = { SnackbarHost(snackbarHostState) }, //Tempat Snackbar di Scaffols
         topBar = {
             TopAppBar(
@@ -63,7 +63,7 @@ fun UpdateMhsView(
 
     ) {padding ->
         Column (
-            modifier = modifier
+            modifier = Modifier
                 .fillMaxSize()
                 .padding(padding)
                 .padding(16.dp)

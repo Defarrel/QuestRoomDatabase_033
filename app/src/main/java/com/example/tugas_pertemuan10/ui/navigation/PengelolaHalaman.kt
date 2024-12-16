@@ -1,16 +1,14 @@
-package com.example.tugas_pertemuan10.ui.costumwidget
+package com.example.tugas_pertemuan10.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavArgument
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.tugas_pertemuan10.ui.navigation.AlamatNavigasi
-import com.example.tugas_pertemuan10.ui.view.mahasiswa.DestinationInsert
+import com.example.tugas_pertemuan10.ui.view.mahasiswa.DestinasiInsert
 import com.example.tugas_pertemuan10.ui.view.mahasiswa.DetailMhsView
 import com.example.tugas_pertemuan10.ui.view.mahasiswa.HomeMhsView
 import com.example.tugas_pertemuan10.ui.view.mahasiswa.InsertMhsView
@@ -21,52 +19,48 @@ fun PengelolaHalaman(
     navController: NavHostController = rememberNavController(),
     modifier: Modifier = Modifier
 ){
-    NavHost(navController = navController, startDestination = DestinationInsert.route) {
+    NavHost(navController = navController, startDestination = DestinasiHome.route)
+    {
         composable(
-            route = DestinationInsert.route
+            route = DestinasiHome.route
         ){
             HomeMhsView(
-                onDetailClick = {nim ->
-                    navController.navigate("${ AlamatNavigasi.DestinationDetail.route}/$nim")
-                    println("Pengelola Halaman: nim = $nim")
+                onDetailClick = { nim ->
+                    navController.navigate("${DestinasiDetail.route}/$nim")
+                    println("PengelolaHalaman: nim = $nim")
                 },
                 onAddMhs = {
-                    navController.navigate(AlamatNavigasi.DestinationInsert.route)
+                    navController.navigate(DestinasiInsert.route)
                 },
-                modifier = modifier
-            )
+                modifier = modifier)
         }
-
         composable(
-            route = DestinationInsert.route
+            route = DestinasiInsert.route
         ){
-            InsertMhsView(
-                onBack = {
-                    navController.popBackStack()
-                },
+            InsertMhsView(onBack = {
+                navController.popBackStack()
+            },
                 onNavigate = {
                     navController.popBackStack()
                 },
-                modifier = modifier
-            )
+                modifier = modifier)
         }
-
         composable(
-            AlamatNavigasi.DestinationDetail.routeWithArgs,
+            DestinasiDetail.routeWithArg,
             arguments = listOf(
-                navArgument(AlamatNavigasi.DestinationDetail.NIM) {
+                navArgument(DestinasiDetail.NIM){
                     type = NavType.StringType
                 }
             )
         ){
-            val nim  = it.arguments?.getString(AlamatNavigasi.DestinationDetail.NIM)
-            nim.let { nim ->
+            val nim = it.arguments?.getString(DestinasiDetail.NIM)
+            nim?.let { nim ->
                 DetailMhsView(
                     onBack = {
                         navController.popBackStack()
                     },
                     onEditClick = {
-                        navController.navigate("${AlamatNavigasi.DestinationEdit.route}/$it")
+                        navController.navigate("${DestinasiUpdate.route}/$it")
                     },
                     modifier = modifier,
                     onDeleteClick = {
@@ -75,11 +69,10 @@ fun PengelolaHalaman(
                 )
             }
         }
-
         composable(
-            AlamatNavigasi.DestinationEdit.routeWithArgs,
+            DestinasiUpdate.routeWithArg,
             arguments = listOf(
-                navArgument(AlamatNavigasi.DestinationEdit.NIM) {
+                navArgument(DestinasiUpdate.NIM){
                     type = NavType.StringType
                 }
             )

@@ -11,7 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.tugas_pertemuan10.ui.costumwidget.PengelolaHalaman
+import com.example.tugas_pertemuan10.ui.navigation.PengelolaHalaman
 import com.example.tugas_pertemuan10.ui.theme.Tugas_Pertemuan10Theme
 
 class MainActivity : ComponentActivity() {
@@ -29,3 +29,4 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+
